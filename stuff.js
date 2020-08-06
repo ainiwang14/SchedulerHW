@@ -1,4 +1,6 @@
 const timeBlocksCount = 13
+$("#currentDay").append(moment().format('DD-MM-YYYY'))
+
 
 function makeTimeBlocks() {
 
@@ -24,17 +26,36 @@ function makeTimeBlockHour(counter) {
     return timeBlockHour
 }
 
+function compareTime(id) {
+    const currentHour = moment().format('H');
+    return id + 8 - currentHour;
+
+}
+
 function makeTimeBlockActivity() {
     const timeBlockActivity = $("<input>");
     timeBlockActivity.text("activity");
     timeBlockActivity.attr("class", "inline activity");
+
+    if (compareTime() < 0) {
+        timeBlockActivity.addClass("past");
+    }
+
+    else if (compareTime() == 0) {
+        timeBlockActivity.addClass("present");
+    }
+
+    else {
+        timeBlockActivity.addClass("future");
+    };
+
     return timeBlockActivity;
 }
 
 function makeTimeBlockSave(counter) {
     const timeBlockSave = $("<button>");
     timeBlockSave.text("save");
-    timeBlockSave.attr("class", "inline save");
+    timeBlockSave.attr("class", "inline saveBtn");
 
     function onClick(counter) {
         const savedActivityText = $("input.activity").val();
