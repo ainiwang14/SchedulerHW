@@ -12,10 +12,9 @@ function makeTimeBlocks() {
         timeBlockContainer
             .append(makeTimeBlockHour(i))
             .append(makeTimeBlockActivity())
-            .append(makeTimeBlockSave(i));
+            .append(makeTimeBlockSave());
         $(".container").append(timeBlockContainer);
     }
-
 }
 
 function makeTimeBlockHour(counter) {
@@ -38,21 +37,21 @@ function makeTimeBlockActivity() {
     timeBlockActivity.attr("class", "inline activity");
 
     if (compareTime() < 0) {
-        timeBlockActivity.addClass("past");
+        timeBlockActivity.addClass("past")
     }
 
     else if (compareTime() == 0) {
-        timeBlockActivity.addClass("present");
+        timeBlockActivity.addClass("present")
     }
 
     else {
-        timeBlockActivity.addClass("future");
+        timeBlockActivity.addClass("future")
     };
 
     return timeBlockActivity;
 }
 
-function makeTimeBlockSave(counter) {
+function makeTimeBlockSave() {
     const timeBlockSave = $("<button>");
     timeBlockSave.text("save");
     timeBlockSave.attr("class", "inline saveBtn");
